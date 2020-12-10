@@ -1,12 +1,12 @@
 class ResizableTextarea {
     constructor(target) {
         this.target = target;
-    }
 
-    init() {
+        /*================= Initialisation ================*/
         this.textAreaFix();
         this.setupObserver();
     }
+
     textAreaFix() {
         let target = this.target;
         target.rows = "1";
