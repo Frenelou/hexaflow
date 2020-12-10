@@ -6,6 +6,9 @@
   "exports": {
     "./*": "./src/js/*.js"
   },
+  "imports": {
+    "./*": "./src/js/*.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,12 +23,10 @@
   },
   "homepage": "https://github.com/Frenelou/hexaflow#readme",
   "dependencies": {
-    "gulp": "^4.0.2",
-    "terser": "^5.5.1"
+    "gulp": "^4.0.2"
   },
   "devDependencies": {
     "gulp-concat": "^2.6.1",
-    "gulp-terser": "^2.0.0",
     "gulp-uglify": "^3.0.2"
   }
 }
