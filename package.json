@@ -1,8 +1,11 @@
 {
   "name": "hexaflow",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Just me trying to publish my first npm package. Move along. Nothing to see.",
   "main": "index.js",
+  "exports": {
+    "./*": "./src/js/*.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
