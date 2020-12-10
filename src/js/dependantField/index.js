@@ -3,7 +3,7 @@ class dependantOf {
         this.state = {
             childInput: el,
             childInputType: el.nodeName,
-            parentInput: document.querySelector(el.dataset.hexDependantOf),
+            parentInput: document.querySelector(el.dataset.hexDependentOf),
         };
         // -------------------------- Initialization ----------------------------- //
         this.watchIfEmptyParent();
@@ -34,5 +34,5 @@ class dependantOf {
 module.exports.dependantField = dependantField;
 
 document.addEventListener('DOMContentLoaded', () =>
-    document.querySelectorAll("[data-hex-dependant-of]").forEach((el) => new dependantOf(el))
+    document.querySelectorAll("[data-hex-dependant-of]").forEach((el) => new hexDependentOf(el))
 );
