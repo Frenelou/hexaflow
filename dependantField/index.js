@@ -31,7 +31,7 @@ class dependantOf {
     }
 }
 
-module.exports.dependantField = dependantField;
+module.exports.hexDependentOf = hexDependentOf;
 
 document.addEventListener('DOMContentLoaded', () =>
     document.querySelectorAll("[data-hex-dependant-of]").forEach((el) => new hexDependentOf(el))
