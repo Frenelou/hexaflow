@@ -97,6 +97,7 @@ class DatePickerManualInput {
 
 
 module.exports.DatePickerManualInput = DatePickerManualInput;
+
 class dependantOf {
     constructor(el) {
         this.state = {
@@ -185,4 +186,3 @@ class ResizableTextarea {
     }
 }
 module.exports.ResizableTextarea = ResizableTextarea;
-
