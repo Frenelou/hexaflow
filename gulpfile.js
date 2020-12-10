@@ -5,6 +5,9 @@ gulp.task('main', function () {
     return gulp.src('src/js/**/*.js')
         .pipe(concat('main.js'))
         .pipe(gulp.dest('./'));
+});gulp.task('all', function () {
+    return gulp.src('src/js/**/*.js')
+        .pipe(gulp.dest('./'));
 });
 
 gulp.task('core', function () {
@@ -12,4 +15,4 @@ gulp.task('core', function () {
         .pipe(gulp.dest('./'));
 });
 
-gulp.task('default', gulp.parallel('core', 'main'));
+gulp.task('default', gulp.parallel('core', 'main', 'all'));
