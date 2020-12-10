@@ -97,7 +97,7 @@ class DatePickerManualInput {
 
 
 module.exports.DatePickerManualInput = DatePickerManualInput;
-class dependantOf {
+class DependentOf {
     constructor(el) {
         this.state = {
             childInput: el,
@@ -130,10 +130,10 @@ class dependantOf {
     }
 }
 
-module.exports.dependantOf = dependantOf;
+module.exports.DependentOf = DependentOf;
 
 document.addEventListener('DOMContentLoaded', () =>
-    document.querySelectorAll("[data-hex-dependant-of]").forEach((el) => new dependantOf(el))
+    document.querySelectorAll("[data-hex-dependant-of]").forEach((el) => new DependentOf(el))
 );
 
 class ResizableTextarea {
