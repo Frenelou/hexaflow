@@ -1,29 +1,34 @@
 class DependentOf {
-    constructor(el) {
+    constructor(el, parents) {
+        console.log("parents", parents);
+        this.parents = parents || el.dataset.hexDependantOf;
         this.state = {
             childInput: el,
             childInputType: el.nodeName,
-            parentInput: document.querySelector(el.dataset.hexDependantOf),
+            parentInput: this.parents.split(",").map(p => document.querySelector(p))
         };
         // -------------------------- Initialization ----------------------------- //
         this.watchIfEmptyParent();
         this.defaultDisabled();
     }
     defaultDisabled({ parentInput, childInput } = this.state) {
-        if (parentInput.value === "" || parentInput.checked === false) childInput.disabled = true;
+        if (parentInput.every(p => p.value === "" || p.checked === false)) childInput.disabled = true;
     }
-    watchIfEmptyParent() {
+    watchIfEmptyParent({ parentInput } = this.state) {
         const deleteDisabled = this.deleteDisabled.bind(this);
-        $(this.state.parentInput).on('change chosen:updated chosen:ready', e =>
-            deleteDisabled(e.target.value === "" || e.target.checked === false));
+        parentInput.forEach(p =>
+            $(p).on('keyup change chosen:updated chosen:ready', () =>
+                deleteDisabled(parentInput.every(pi => {
+                    if (pi.type === "checkbox") return pi.checked === false
+                    else return pi.value === "";
+                })))
+        )
     }
     deleteDisabled(isParentEmpty, { childInput } = this.state) {
-        let isChbx = childInput.checked !== undefined;
-
         childInput.disabled = isParentEmpty;
 
         if (isParentEmpty) {
-            if (isChbx) childInput.checked = false;
+            if (childInput.type === "checkbox") childInput.checked = false;
             else childInput.value = "";
         };
 
