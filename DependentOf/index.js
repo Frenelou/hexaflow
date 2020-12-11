@@ -1,6 +1,5 @@
 class DependentOf {
     constructor(el, parents) {
-        console.log("parents", parents);
         this.parents = parents || el.dataset.hexDependantOf;
         this.state = {
             childInput: el,
