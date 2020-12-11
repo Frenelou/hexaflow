@@ -1,3 +1,5 @@
+/* global $ */
+
 class DependentOf {
     constructor(el, parents) {
         this.parents = parents || el.dataset.hexDependantOf;
@@ -6,23 +8,26 @@ class DependentOf {
             childInputType: el.nodeName,
             parentInput: this.parents.split(",").map(p => document.querySelector(p))
         };
+
         // -------------------------- Initialization ----------------------------- //
+        this.checkIfEmptyParent();
         this.watchIfEmptyParent();
-        this.defaultDisabled();
     }
-    defaultDisabled({ parentInput, childInput } = this.state) {
-        if (parentInput.every(p => p.value === "" || p.checked === false)) childInput.disabled = true;
-    }
+
     watchIfEmptyParent({ parentInput } = this.state) {
-        const deleteDisabled = this.deleteDisabled.bind(this);
+        const checkIfEmptyParent = this.checkIfEmptyParent.bind(this);
         parentInput.forEach(p =>
-            $(p).on('keyup change chosen:updated chosen:ready', () =>
-                deleteDisabled(parentInput.every(pi => {
-                    if (pi.type === "checkbox") return pi.checked === false
-                    else return pi.value === "";
-                })))
+            $(p).on('keyup change chosen:updated chosen:ready', () => checkIfEmptyParent())
         )
     }
+
+    checkIfEmptyParent() {
+        let isParentEmpty = this.state.parentInput.every(pi =>
+            pi.type === "checkbox" ? pi.checked === false : pi.value === "");
+
+        return this.deleteDisabled(isParentEmpty);
+    }
+
     deleteDisabled(isParentEmpty, { childInput } = this.state) {
         childInput.disabled = isParentEmpty;
 
