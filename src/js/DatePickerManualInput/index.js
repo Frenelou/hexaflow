@@ -16,7 +16,7 @@ class DatePickerManualInput {
                 target.closest(".flatpickr-wrapper").parentNode)
         }
 
-        this.init()
+        this.init();
     }
     init() {
         this.dateFormat();
@@ -26,7 +26,6 @@ class DatePickerManualInput {
         this.handleBlur(); // Validates date on blur
         this.handleFocus();
         this.handleReset();
-
     }
     changeFpConfig() {
         this.state.fp.set("clickOpens", false);

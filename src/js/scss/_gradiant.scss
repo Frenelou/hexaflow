@@ -1,0 +1,14 @@
+@mixin hex-gradiant($color1, $color2, $steps, $colorLast) {
+  .hex-gradiant {
+    @for $i from 1 through $steps - 1 {
+      &:nth-child(#{$i}) {
+        background-color: mix($color1, $color2, percentage($i/$steps));
+      }
+    }
+    @if (colorLast) {
+      &:last-child {
+        background-color: $colorLast;
+      }
+    }
+  }
+}
