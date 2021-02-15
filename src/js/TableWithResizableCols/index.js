@@ -65,7 +65,7 @@ class TableWithResizableCols {
             let { start, startWidth, startX, pressed, hexMinWidth } = this.getState(),
                 newWidth = startWidth + (e.pageX - startX);
 
-            if (pressed && newWidth >= hexMinWidth) start.style.width = newWidth + "px";
+            if (pressed && newWidth >= hexMinWidth) start.style.minWidth = newWidth + "px";
         });
     }
     handleMouseUp() {
