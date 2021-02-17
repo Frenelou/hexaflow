@@ -198,16 +198,16 @@ module.exports.ResizableTextarea = ResizableTextarea;
 class TableWithResizableCols {
     constructor(table) {
         this.state = {
-            head: table.querySelector("thead"),
+            head: table,
             headers: table.querySelectorAll(
-                "th:not(:last-child)"),
+                ".hex-resizable-col") || table.querySelectorAll(
+                "th:not(:last-child), td:not(:last-child)"),
             pressed: false,
             start: undefined,
             startX: undefined,
             startWidth: undefined,
         }
         this.setState = newstate => this.state = newstate;
-        this.getState = () => this.state;
         this.init();
     }
     init() {
@@ -233,12 +233,9 @@ class TableWithResizableCols {
 
             Object.assign(handle.style, style);
 
-            handle.addEventListener("mouseenter", e => this.toggleResizeCursor(true))
-            handle.addEventListener("mouseout", e => this.toggleResizeCursor(false))
+            handle.addEventListener("mouseenter", e => handle.style.cursor = "col-resize")
+            handle.addEventListener("mouseout", e => e => handle.style.cursor = "default")
         })
-    }
-    toggleResizeCursor(bool) {
-        this.state.head.style.cursor = bool ? "col-resize" : "default";
     }
     handleMouseDown() {
         this.state.headers.forEach(th => {
@@ -259,7 +256,7 @@ class TableWithResizableCols {
     }
     handleMouseMove() {
         this.state.head.addEventListener("mousemove", e => {
-            let { start, startWidth, startX, pressed, hexMinWidth } = this.getState(),
+            let { start, startWidth, startX, pressed, hexMinWidth } = this.state,
                 newWidth = startWidth + (e.pageX - startX);
 
             if (pressed && newWidth >= hexMinWidth) start.style.minWidth = newWidth + "px";
@@ -267,7 +264,7 @@ class TableWithResizableCols {
     }
     handleMouseUp() {
         this.state.head.addEventListener("mouseup", () => {
-            let state = this.getState();
+            let state = this.state;
 
             if (state.pressed) {
                 state.start.classList.remove("resizing");
